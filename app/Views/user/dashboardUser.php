@@ -1,37 +1,31 @@
-<?= $this->extend('layouts/main') ?>
+<?= $this->extend('layouts/main_user') ?>
 
 <?= $this->section('content') ?>
 <div class="row">
-    <div class="col-md-12">
-        <h1>User Dashboard</h1>
-        <p>Selamat datang, <?= session()->get('name_user') ?>!</p>
-    </div>
+    <?php if (!empty($products)): ?>
+        <?php foreach ($products as $product): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="<?= base_url('uploads/products/' . $product['image']); ?>" class="card-img-top" alt="<?= $product['name_product'] ?>" width="100">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $product['name_product'] ?></h5>
+                        <p class="card-text"><?= $product['description'] ?></p>
+                        <p class="card-text"><b>Rp <?= number_format($product['price'], 0, ',', '.') ?></b></p>
+                        <form action="<?= route_to('cart.add'); ?>" method="post">
+                            <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="text-center">No products available.</p>
+    <?php endif; ?>
 </div>
 
-<!-- Contoh Daftar Produk -->
-<div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product 1">
-            <div class="card-body">
-                <h5 class="card-title">Produk 1</h5>
-                <p class="card-text">Deskripsi singkat produk 1.</p>
-                <a href="#" class="btn btn-primary">Beli Sekarang</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product 2">
-            <div class="card-body">
-                <h5 class="card-title">Produk 2</h5>
-                <p class="card-text">Deskripsi singkat produk 2.</p>
-                <a href="#" class="btn btn-primary">Beli Sekarang</a>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
+        <script>
         <?php if(session()->getFlashdata('pesan')) :?>
           Swal.fire({
           title: "berhasil!",

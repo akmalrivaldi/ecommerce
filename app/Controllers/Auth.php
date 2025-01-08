@@ -52,6 +52,7 @@ class Auth extends Controller
                 'role'     => $user['role'],
                 'isLoggedIn' => true
             ]);
+            session()->set('user_id', $user['id']);
 
             session()->setFlashdata('pesan','Login berhasil');
             return redirect()->to('/dashboard');

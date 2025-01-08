@@ -22,6 +22,7 @@
   <div class="row justify-content-center pb-3 mt-1">
           <div class="col-md-4">
             <form action="/register/process" method="post" >
+            <?= csrf_field() ?>
               <div class="mb-3">
                 <label for="name_user" class="form-label">username</label>
                 <input

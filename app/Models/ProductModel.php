@@ -9,7 +9,6 @@ class ProductModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = ['name_product', 'description', 'image','price', 'category_id', 'stock'];
-
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

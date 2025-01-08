@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main'); ?>
+<?= $this->extend('layouts/main_admin'); ?>
 <?= $this->section('content'); ?>
 
 <div class="row">
@@ -36,7 +36,7 @@
                     <i class="material-icons">receipt_long</i>
                 </div>
                 <p class="card-category">Total Orders</p>
-                <h3 class="card-title"><?= $total_orders ?? 0 ?></h3>
+                <h3 class="card-title"><?= $totalOrders ?? 0 ?></h3>
             </div>
         </div>
     </div>

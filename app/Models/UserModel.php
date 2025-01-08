@@ -11,6 +11,7 @@ class UserModel extends Model
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    
 
     public function countUsers()
     {

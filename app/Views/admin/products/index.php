@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<?= $this->extend('layouts/main_admin') ?>
 <?= $this->section('content') ?>
 <div class="container mt-3">
     <h3>Kelola Produk</h3>
@@ -43,7 +43,7 @@
                     <td><?= $product['id']; ?></td>
                     <td><?= $product['name_product']; ?></td>
                     <td>
-                    <img src="<?= base_url('uploads/products/' . $product['image']); ?>" alt="Foto Produk" width="150">
+                    <img src="<?= base_url('uploads/products/' . $product['image']); ?>" alt="Foto Produk" width="100">
                     </td>
                     <td><?= $product['name_category']; ?></td>
                     <td><?= $product['price']; ?></td>
