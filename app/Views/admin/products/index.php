@@ -46,7 +46,7 @@
                     <img src="<?= base_url('uploads/products/' . $product['image']); ?>" alt="Foto Produk" width="100">
                     </td>
                     <td><?= $product['name_category']; ?></td>
-                    <td><?= $product['price']; ?></td>
+                    <td>Rp<?= number_format($product['price'], 0, ',', '.') ?></td>
                     <td><?= $product['stock']; ?></td>
                     <td>
                         <a href="<?= site_url('admin/products/edit/' . $product['id']); ?>" class="btn btn-sm btn-warning">Edit</a>
