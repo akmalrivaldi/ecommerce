@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\CartModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use App\Models\ProductModel;
@@ -14,6 +15,7 @@ class dashboard extends Controller
     protected $categoryModel;
     protected $userModel;
     protected $orderModel;
+    protected $cartModel;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class dashboard extends Controller
         $this->categoryModel = new CategoryModel();
         $this->userModel = new UserModel();
         $this->orderModel = new OrderModel();
+        $this->cartModel = new CartModel();
     }
     public function index()
 {
@@ -46,7 +49,7 @@ class dashboard extends Controller
 
     public function user()
     {
-        
+        $userId = session()->get('user_id');
         $search = $this->request->getGet('search');
         $category = $this->request->getGet('category');
 
@@ -61,9 +64,13 @@ class dashboard extends Controller
             $query->where('products.category_id', $category);
         }
 
-        $data['products'] = $query->findAll();
-        $data['categories'] = $this->categoryModel->findAll();
-
+        $data = [
+            'products' => $query->findAll(),
+            'categories' => $this->categoryModel->findAll(),
+            'orderCount' => $this->cartModel->countOrders($userId)
+        ];
+        
         return view('user/dashboardUser', $data);
+        
     }
 }

@@ -9,7 +9,7 @@ class CartModel extends Model
     protected $table = 'cart';
     protected $primaryKey = 'id';
     protected $allowedFields = ['user_id', 'product_id', 'quantity'];
-    
+
     public function getCartByUserId($userId)
     {
         return $this->db->table('cart')
@@ -48,5 +48,14 @@ public function clearCartByUserId($userId)
     return $this->where('user_id', $userId)->delete();
 }
 
+public function countOrders($userId){
+    {
+        return $this->where('user_id', $userId)
+                    ->selectSum('quantity')
+                    ->get()
+                    ->getRow()
+                    ->quantity ?? 0;
+    }
+}
 
 }

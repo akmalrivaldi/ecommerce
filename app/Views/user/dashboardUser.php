@@ -9,10 +9,10 @@
                     <div class="card shadow-sm border-0 rounded-lg">
                         <!-- Product Image -->
                         <div class="card-img-top overflow-hidden">
-                            <img src="<?= base_url('uploads/products/' . $product['image']); ?>" 
-                                 class="img-fluid rounded-top" 
-                                 alt="<?= $product['name_product'] ?>" 
-                                 style="height: 250px; object-fit: cover;">
+                         <img src="<?= base_url('uploads/products/' . $product['image']); ?>" 
+                        class="img-fluid rounded-top" 
+                        alt="<?= $product['name_product'] ?>" 
+                         style="height: 250px; object-fit: cover; display: block; margin: 0 auto;">
                         </div>
 
                         <!-- Product Details -->
@@ -28,7 +28,9 @@
                                 <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
                                 <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn btn-outline-primary w-100 fw-bold">
-                                    Tambah ke Keranjang
+                                    <a href="<?= route_to('cart.add'); ?>" class="btn btn-sm btn-primary rounded-pill w-100">
+                            <i class="fa fa-cart-plus"></i> Tambah ke Keranjang
+                        </a>
                                 </button>
                             </form>
                         </div>

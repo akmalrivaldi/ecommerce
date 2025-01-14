@@ -115,24 +115,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('user/dashboard') ?>">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('cart') ?>">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('cart/orders') ?>">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('profile') ?>">Profil saya</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-danger" href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('user/dashboard') ?>">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('cart') ?>">
+                Cart <span class="badge bg-secondary"><?= $orderCount ?></span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('cart/orders') ?>">Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('profile') ?>">Profil saya</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-danger" href="/logout">Logout</a>
+        </li>
+    </ul>
+</div>
+
     </div>
 </nav>
 
