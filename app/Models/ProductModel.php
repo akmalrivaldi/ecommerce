@@ -5,6 +5,7 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
+ 
     protected $table = 'products';
     protected $primaryKey = 'id';
 
@@ -12,6 +13,7 @@ class ProductModel extends Model
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+
     public function getProductsWithCategory($categoryId = null)
     {
         $builder = $this->db->table('products');

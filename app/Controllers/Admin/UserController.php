@@ -18,11 +18,11 @@ class UserController extends BaseController
         $data['users'] = $this->UserModel->findAll();
         return view('admin/users/index', $data);
     }
-    public function create()
-    {
-        $data['users'] = $this->UserModel->findAll();
-        return view('admin/users/create', $data);
-    }
+    // public function create()
+    // {
+    //     $data['users'] = $this->UserModel->findAll();
+    //     return view('admin/users/create', $data);
+    // }
     public function delete($id)
     {
         $this->UserModel->delete($id);

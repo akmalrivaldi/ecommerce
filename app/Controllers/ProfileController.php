@@ -62,6 +62,6 @@ class ProfileController extends BaseController
             $this->profileModel->insert($data);
         }
         session()->setFlashdata('pesan', 'Profile Berhasil diperbarui');
-        return redirect()->back();
+        return redirect()->to('user/dashboard');
     }
 }

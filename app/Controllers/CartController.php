@@ -26,7 +26,7 @@ class CartController extends BaseController
             return redirect()->to('/login')->with('error', 'Anda harus login untuk melihat keranjang.');
         }
 
-        $cartItems = $this->cartModel->getCartByUser($userId);
+        $cartItems = $this->cartModel->getCartByUserId($userId);
         return view('cart/index', ['cartItems' => $cartItems]);
     }
 
@@ -84,57 +84,56 @@ class CartController extends BaseController
     }
 
     public function checkout()
-{
-    $selectedItems = $this->request->getPost('selected_items');
-
-    if (empty($selectedItems)) {
-        return redirect()->back()->with('error', 'Silakan pilih barang yang ingin di-checkout.');
+    {
+        $selectedItems = $this->request->getPost('selected_items');
+    
+        if (empty($selectedItems)) {
+            return redirect()->back()->with('error', 'Silakan pilih barang yang ingin di-checkout.');
+        }
+    
+        $userId = session()->get('user_id');
+    
+        // Ambil semua item keranjang untuk user
+        $cartItems = $this->cartModel->getCartByUserId($userId);
+    
+        // Filter hanya item yang dipilih
+        $filteredCartItems = array_filter($cartItems, function ($item) use ($selectedItems) {
+            return in_array($item['id'], $selectedItems);
+        });
+    
+        if (empty($filteredCartItems)) {
+            return redirect()->back()->with('error', 'Item yang dipilih tidak valid.');
+        }
+    
+        // Hitung total harga hanya untuk item yang dipilih
+        $totalAmount = array_reduce($filteredCartItems, function ($sum, $item) {
+            return $sum + ($item['product_price'] * $item['quantity']);
+        }, 0);
+    
+        // Simpan pesanan
+        $orderId = $this->orderModel->insert([
+            'user_id' => $userId,
+            'total_amount' => $totalAmount,
+            'payment_status' => 'unpaid'
+        ]);
+    
+        // Simpan detail pesanan
+        foreach ($filteredCartItems as $item) {
+            $orderDetailData = [
+                'order_id' => $orderId,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['product_price'],
+            ];
+            $this->orderDetailModel->insert($orderDetailData);
+        }
+    
+        // Hapus barang yang di-checkout dari keranjang
+        $this->cartModel->whereIn('id', $selectedItems)->delete();
+    
+        session()->setFlashdata('pesan', 'Pesanan anda berhasil diproses');
+        return redirect()->to('cart/orders');
     }
-
-    $userId = session()->get('user_id');
-    $cartItems = $this->cartModel->getCartByUserId(session()->get('user_id'));
-
-    // $cartItems = $this->cartModel->getCartWithPrices($userId, $selectedItems);
-    // dd($cartItems);
-
-    // Hitung total harga
-    $totalAmount = array_reduce($cartItems, function ($sum, $item) {
-        return $sum + ($item['product_price'] * $item['quantity']);
-    }, 0);
-
-    // Simpan pesanan
-    $orderId = $this->orderModel->insert([
-        'user_id' => $userId,
-        'total_amount' => $totalAmount,
-        'payment_status' => 'unpaid'
-    ]);
-
-    foreach ($cartItems as $item) {
-        $orderDetailData = [
-            'order_id' => $orderId,
-            'product_id' => $item['product_id'],
-            'quantity' => $item['quantity'],
-            'price' => $item['product_price'],
-        ];
-        $this->orderDetailModel->insert($orderDetailData);
-    }
-
-    // Simpan detail pesanan
-    // foreach ($cartItems as $item) {
-    //     $this->orderDetailModel->insert([
-    //         'order_id' => $orderId,
-    //         'product_id' => $item['id'],
-    //         'quantity' => $item['quantity'],
-    //         'price' => $item['product_price']
-    //     ]);
-    // }
-
-    // Hapus barang yang di-checkout dari keranjang
-    $this->cartModel->whereIn('id', $selectedItems)->delete();
-
-    session()->setFlashdata('pesan', 'Pesanan anda berhasil diproses');
-    return redirect()->to('cart/orders');
-}
 
 public function updateQuantity()
 {

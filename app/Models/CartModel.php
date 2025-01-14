@@ -9,14 +9,7 @@ class CartModel extends Model
     protected $table = 'cart';
     protected $primaryKey = 'id';
     protected $allowedFields = ['user_id', 'product_id', 'quantity'];
-
-    public function getCartByUser($userId)
-    {
-        return $this->select('cart.*, products.name_product as product_name, products.price, products.image')
-                    ->join('products', 'products.id = cart.product_id')
-                    ->where('cart.user_id', $userId)
-                    ->findAll();
-    }
+    
     public function getCartByUserId($userId)
     {
         return $this->db->table('cart')

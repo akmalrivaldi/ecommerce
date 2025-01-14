@@ -34,14 +34,6 @@ class DashboardController extends BaseController
     }
 
     // // Tambahkan kondisi jika ada filter kategori
-    // if (!empty($category)) {
-    //     $query->where('products.category_id', $category);
-    // }
-
-    // Tambahkan kondisi jika ada filter alfabet
-    // if (!empty($filter)) {
-    //     $query->like('products.name_product', $filter . '%'); // Mencari nama produk yang dimulai dengan filter
-    // }
 
     // Eksekusi query dan ambil hasilnya
     $data['products'] = $query->findAll();

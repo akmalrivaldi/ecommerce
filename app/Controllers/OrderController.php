@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Models\OrderModel;
 use App\Models\OrderDetailModel;
+use App\Models\ProductModel;
 
 class OrderController extends BaseController
 {
     protected $orderModel;
     protected $orderDetailModel;
+    protected $productModel;
 
     public function __construct()
     {
         $this->orderModel = new OrderModel();
         $this->orderDetailModel = new OrderDetailModel();
+        $this->productModel = new ProductModel();
     }
 
         public function index()
@@ -45,10 +48,13 @@ class OrderController extends BaseController
 {
     $orderId = $this->request->getPost('order_id');
     $paymentMethod = $this->request->getPost('payment_method');
+    $paymentMethod = $this->request->getPost('payment_method');
+    $quantity = $this->request->getPost('quantity');
 
     if (!$orderId || !$paymentMethod) {
         return redirect()->back()->with('error', 'Metode pembayaran harus dipilih.');
     }
+
 
     // Update status pesanan menjadi "paid"
     $this->orderModel->update($orderId, [

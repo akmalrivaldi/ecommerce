@@ -35,20 +35,20 @@ class CategoryController extends BaseController
         return redirect()->to('/admin/categories');
     }
 
-    public function edit($id)
-    {
-        $data['categories'] = $this->categoryModel->findAll();
-        return view('admin/categories/edit', $data);
-    }
+    // public function edit($id)
+    // {
+    //     $data['categories'] = $this->categoryModel->findAll();
+    //     return view('admin/categories/edit', $data);
+    // }
 
-    public function update($id)
-    {
-        $this->categoryModel->update($id, [
-            'name_category' => $this->request->getPost('name_category'),
+    // public function update($id)
+    // {
+    //     $this->categoryModel->update($id, [
+    //         'name_category' => $this->request->getPost('name_category'),
 
-        ]);
-        return redirect()->to('/admin/categories');
-    }
+    //     ]);
+    //     return redirect()->to('/admin/categories');
+    // }
 
     public function delete($id)
     {

@@ -1,18 +1,18 @@
 <?= $this->extend('layouts/main_admin') ?>
 <?= $this->section('content') ?>
 <div class="container mt-3">
-    <h3>Laporan orders</h3>
-     <!-- Tabel Produk -->
+    <h3 class="text-center text-warning">Laporan Orders</h3>
+    
+    <!-- Tabel Produk -->
     <table class="table table-bordered table-hover text-center">
-        <thead>
+        <thead class="bg-warning text-white">
             <tr>
-                <th>ID</th>
-                <th>User ID</th>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Payment Method</th>
-                <!-- <th>Aksi</th> -->
+                <th><i class="fas fa-id-badge"></i> ID</th>
+                <th><i class="fas fa-user"></i> User ID</th>
+                <th><i class="fas fa-calendar-alt"></i> Order Date</th>
+                <th><i class="fas fa-check-circle"></i> Status</th>
+                <th><i class="fas fa-money-bill-wave"></i> Total</th>
+                <th><i class="fas fa-credit-card"></i> Payment Method</th>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +29,16 @@
         </tbody>
     </table>
 </div>
+
 <script>
-        <?php if(session()->getFlashdata('pesan')) :?>
-          Swal.fire({
-          title: "berhasil!",
-          text: '<?= session()->getFlashdata('pesan'); ?>',
-          icon: "success"
-          });
-      <?php endif; ?>
-      </script>
+    <?php if(session()->getFlashdata('pesan')) :?>
+      Swal.fire({
+        title: "Berhasil!",
+        text: '<?= session()->getFlashdata('pesan'); ?>',
+        icon: "success",
+        confirmButtonColor: '#ff6600'
+      });
+    <?php endif; ?>
+</script>
+
 <?= $this->endSection() ?>
