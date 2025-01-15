@@ -21,7 +21,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-md-3 col-lg-2">
+            <div class="col-md-3 col-lg-2 mt-4">
                 <button type="submit" class="btn btn-primary w-100 p-2 rounded-3" style="height: 40px;">
                     <i class="material-icons align-middle me-1">filter_list</i> Filter
                 </button>
@@ -67,12 +67,12 @@
                         <td>
                             <a href="<?= site_url('admin/products/edit/' . $product['id']); ?>" 
                                class="btn btn-sm btn-warning rounded-pill">
-                                <i class="material-icons align-middle">edit</i>
+                                <i class="material-icons align-middle">edit</i>Edit
                             </a>
                             <a href="<?= site_url('admin/products/delete/' . $product['id']); ?>" 
                                class="btn btn-sm btn-danger rounded-pill" 
                                onclick="return confirm('Hapus produk ini?')">
-                                <i class="material-icons align-middle">delete</i>
+                                <i class="material-icons align-middle">delete</i>Delete
                             </a>
                         </td>
                     </tr>

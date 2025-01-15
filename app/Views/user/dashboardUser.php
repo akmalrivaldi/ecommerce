@@ -28,7 +28,6 @@
                                 <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
                                 <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn btn-outline-primary w-100 fw-bold">
-                                    <a href="<?= route_to('cart.add'); ?>" class="btn btn-sm btn-primary rounded-pill w-100">
                             <i class="fa fa-cart-plus"></i> Tambah ke Keranjang
                         </a>
                                 </button>

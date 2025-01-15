@@ -18,7 +18,6 @@
                     <td><?= $category['id'] ?></td>
                     <td><?= $category['name_category'] ?></td>
                     <td>
-                        <a href="<?= base_url('admin/categories/edit/'.$category['id']) ?>" class="btn btn-warning btn-sm">Edit</a>
                         <a href="<?= base_url('admin/categories/delete/'.$category['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                     </td>
                 </tr>
