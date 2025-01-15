@@ -121,7 +121,8 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?= site_url('cart') ?>">
-                Cart <span class="badge bg-secondary"><?= $orderCount ?></span>
+            <i class="fa fa-cart-plus"></i>
+                 <span class="badge bg-secondary"><?= $orderCount ?></span>
             </a>
         </li>
         <li class="nav-item">
